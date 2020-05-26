@@ -1,0 +1,22 @@
+{
+  "name": "busticketing",
+  "version": "1.0.0",
+  "description": "A Node.js RESTful API for a Bus Ticketing Service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PoojaRani24/BusTicketing.git"
+  },
+  "author": "Pooja Rani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PoojaRani24/BusTicketing/issues"
+  },
+  "homepage": "https://github.com/PoojaRani24/BusTicketing#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
