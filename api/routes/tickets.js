@@ -13,4 +13,20 @@ router.post('/',(req,res,next) => {
     });
 });
 
+router.get('/:ticketId',(req,res,next) =>{
+    const id = req.params.ticketId;
+    if(id === 'special'){
+        res.status(200).json({
+            message :'You discovered the special Id',
+            Id:id
+        });
+    }
+    else{
+        res.status(200).json({
+            message :'You passed an Id',
+            Id : id
+        });
+    }
+});
+
 module.exports = router;
