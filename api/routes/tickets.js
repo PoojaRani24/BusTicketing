@@ -1,14 +1,23 @@
 const express = require('express');
 const router  = express.Router();
+const mongoose = require('mongoose');
+const User = require('../models/user')
 
 //----------Book a Ticket---------------
 router.post('/book',(req,res,next) => {
-    const user = {
-        name:req.body.name,
-        src:req.body.src,
-        des:req.body.des,
-        number:req.body.number
-    }
+    const user = new User({
+        _id:mongoose.Types.ObjectId(),
+         name : req.body.name,
+         src:req.body.src,
+         des:req.body.des,
+         number:req.body.number
+    });
+    user
+    .save()
+    .then(result => {
+        console.log(result);
+    })
+    .catch(err => console.log(err));
     res.status(200).json({
         message : "Handling POST Request to /tickets/book",
         userdetails:user

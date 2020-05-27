@@ -2,9 +2,19 @@ const express = require('express');
 const app     = express();
 const morgan  = require('morgan');
 const bodyParser = require('body-parser')
+const mongoose   = require('mongoose');
 
 const ticketRoutes = require('./api/routes/tickets');
 const adminRoutes  = require('./api/routes/admin');
+
+mongoose.connect(
+    'mongodb+srv://bus-ticketing:'+
+      process.env.MONGO_ATLAS_PW+
+      '@cluster0-9ksoe.mongodb.net/test?retryWrites=true&w=majority',
+     {
+       useMongoClient:true
+     }
+  );
 
 //middleware
  app.use(morgan('dev'));
