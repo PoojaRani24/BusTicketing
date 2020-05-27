@@ -1,6 +1,20 @@
 const express = require('express');
 const router  = express.Router();
 
+//----------Book a Ticket---------------
+router.post('/book',(req,res,next) => {
+    const user = {
+        name:req.body.name,
+        src:req.body.src,
+        des:req.body.des,
+        number:req.body.number
+    }
+    res.status(200).json({
+        message : "Handling POST Request to /tickets/book",
+        userdetails:user
+    });
+});
+
 //----------View Ticket Status---------
 
 router.get('/:ticketId/status',(req,res,next) => {

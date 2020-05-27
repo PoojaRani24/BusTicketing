@@ -1,11 +1,16 @@
 const express = require('express');
 const app     = express();
-const morgan  = express('morgan');
+const morgan  = require('morgan');
+const bodyParser = require('body-parser')
 
 const ticketRoutes = require('./api/routes/tickets');
 const adminRoutes  = require('./api/routes/admin');
 
- //app.use(morgan('dev'));
+//middleware
+ app.use(morgan('dev'));
+  //types of data to be parsed -> urlencoded and json
+ app.use(bodyParser.urlencoded({extended:false}))
+ app.use(bodyParser.json())
 
 //Routes that should handle request
 app.use('/tickets',ticketRoutes);
