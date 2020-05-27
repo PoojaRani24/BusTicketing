@@ -35,6 +35,13 @@ router.get('/close',(req,res,next) => {
     });
 });
 
+//----------Update tickets status and User details---------
 
+router.patch('/:ticketId/update',(req,res,next) => {
+    const id=req.params.ticketId;
+    res.status(200).json({
+        message : "Handling PATCH Request to /tickets/"+id+"/update"
+    });
+});
 
 module.exports = router;
