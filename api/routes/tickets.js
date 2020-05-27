@@ -39,7 +39,7 @@ router.get('/close',(req,res,next) => {
 
 router.patch('/:ticketId/update',(req,res,next) => {
     const id=req.params.ticketId;
-    res.status(200).json({
+    res.status(201).json({
         message : "Handling PATCH Request to /tickets/"+id+"/update"
     });
 });
