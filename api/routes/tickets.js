@@ -2,39 +2,65 @@ const express = require('express');
 const router  = express.Router();
 const mongoose = require('mongoose');
 const Ticket = require('../models/ticket')
+const Bus = require('../models/bus')
+
+var seat_no
 
 //----------Book a Ticket---------------
 router.post('/book',(req,res,next) => {
-    const ticket = new Ticket({
-        _id:mongoose.Types.ObjectId(),
-         status:true,
-         name : req.body.name,
-         src:req.body.src,
-         des:req.body.des,
-    });
-    ticket
-    .save()
-    .then(result => {
-        console.log(result);
-        res.status(201).json({
-            message : "Booked a ticket Successfully",
-            ticketdetails:{
-                _id:result._id,
-                status:result.status,
-                name:result.name,
-                src:result.src,
-                des:result.des,
-                request:{
-                    type:'GET',
-                    url:"http://localhost:3000/tickets/"+result._id
-                }
+    //---------------------------
+        Ticket.find()
+        .exec()
+        .then(doc => {
+            seat_no=doc.length
+            // console.log("Entries in db are: ")
+            // console.log(seat_no)
+            // console.log("hello bro")
+            // console.log(doc.length)
+            if(seat_no<40){
+                const ticket = new Ticket({
+                    _id:mongoose.Types.ObjectId(),
+                     status:true,
+                     name : req.body.name,
+                     src:req.body.src,
+                     des:req.body.des,
+                });
+                ticket
+                .save()
+                .then(result => {
+                    console.log(result);
+                    seat_no=seat_no+1;
+                    console.log(seat_no)
+                    res.status(201).json({
+                        message : "Booked a ticket Successfully",
+                        ticketdetails:{
+                            _id:result._id,
+                            status:result.status,
+                            name:result.name,
+                            src:result.src,
+                            des:result.des,
+                            request:{
+                                type:'GET',
+                                url:"http://localhost:3000/tickets/"+result._id
+                            }
+                        }
+                    });
+                })
+                .catch(err => {
+                    console.log(err)
+                    res.status(500).json({error:err})
+                });
             }
-        });
-    })
-    .catch(err => {
-        console.log(err)
-        res.status(500).json({error:err})
-    });
+            else{
+                res.status(500).json({
+                    message:"All seats are booked !"
+                })
+            }
+        })
+        .catch()
+       // console.log(seat_no)
+    //---------------------------
+    
 });
 
 //----------View Open tickets---------
