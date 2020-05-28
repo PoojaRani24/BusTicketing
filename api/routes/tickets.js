@@ -133,8 +133,27 @@ router.get('/:ticketId/status',(req,res,next) => {
 
 router.get('/:ticketId/details',(req,res,next) => {
     const id=req.params.ticketId;
-    res.status(200).json({
-        message : "Handling GET Request to /tickets/"+id+"/details"
+    Ticket.findById(id)
+    .exec()
+    .then(doc => {
+        console.log("From db ",doc);
+        if(doc){
+            if(doc.status === true){
+                res.status(200).json(doc);
+            }
+            else{
+                res.status(200).json({
+                    message :"Your ticket is not Booked"
+                });
+            }
+        }
+        else{
+            res.status(404).json({message:"No valid entry for the provided ID"})
+        }
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({error:err});
     });
 });
 
