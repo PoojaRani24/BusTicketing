@@ -17,8 +17,18 @@ router.post('/book',(req,res,next) => {
     .then(result => {
         console.log(result);
         res.status(201).json({
-            message : "Handling POST Request to /tickets/book",
-            ticketdetails:result
+            message : "Booked a ticket Successfully",
+            ticketdetails:{
+                _id:result._id,
+                status:result.status,
+                name:result.name,
+                src:result.src,
+                des:result.des,
+                request:{
+                    type:'GET',
+                    url:"http://localhost:3000/tickets/"+result._id
+                }
+            }
         });
     })
     .catch(err => {
@@ -38,15 +48,29 @@ router.get('/open',(req,res,next) => {
 //----------View Close tickets---------
 
 router.get('/close',(req,res,next) => {
-    // res.status(200).json({
-    //     message : "Handling GET Request to /tickets/close"
-    // });
     Ticket.find()
+    .select("_id status name src des")
     .exec()
     .then(doc => {
         console.log(doc)
         if(doc.length>0){
-        res.status(200).json(doc)
+            const response ={
+                count: doc.length,
+                tickets : doc.map(doc => {
+                    return {
+                        _id:doc._id,
+                        status:doc.status,
+                        name:doc.name,
+                        src:doc.src,
+                        des:doc.des,
+                        request:{
+                            type:'GET',
+                            url:'http://localhost:3000/tickets/'+doc._id
+                        }
+                    }
+                })
+            }
+            res.status(200).json(response)
         }
         else{
         res.status(404).json({
@@ -64,6 +88,7 @@ router.get('/close',(req,res,next) => {
 router.get('/:ticketId',(req,res,next) => {
     const id=req.params.ticketId;
     Ticket.findById(id)
+    .select("_id status name src des")
     .exec()
     .then(doc => {
         console.log("From db ",doc);
@@ -134,6 +159,7 @@ router.get('/:ticketId/status',(req,res,next) => {
 router.get('/:ticketId/details',(req,res,next) => {
     const id=req.params.ticketId;
     Ticket.findById(id)
+    .select("_id name src des")
     .exec()
     .then(doc => {
         console.log("From db ",doc);
@@ -169,7 +195,13 @@ router.patch('/:ticketId/update',(req,res,next) => {
     .exec()
     .then(result => {
         console.log(result)
-        res.send(200).json(result)
+        res.status(200).json({
+            message :"Ticket is Updated",
+            request:{
+                type:'GET',
+                url:'http://localhost:3000/tickets/'+id
+            }
+        })
     })
     .catch( err => {
         console.log(err)

@@ -12,9 +12,11 @@ mongoose.connect(
       process.env.MONGO_ATLAS_PW+
       '@cluster0-9ksoe.mongodb.net/test?retryWrites=true&w=majority',
      {
-       useMongoClient:true
+        useUnifiedTopology: true,
+        useNewUrlParser: true,
      }
   );
+  mongoose.Promise =global.Promise;
 
 //middleware
  app.use(morgan('dev'));
