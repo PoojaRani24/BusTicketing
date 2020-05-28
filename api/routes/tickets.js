@@ -161,9 +161,20 @@ router.get('/:ticketId/details',(req,res,next) => {
 
 router.patch('/:ticketId/update',(req,res,next) => {
     const id=req.params.ticketId;
-    res.status(201).json({
-        message : "Handling PATCH Request to /tickets/"+id+"/update"
-    });
+    const updateOps ={}
+    for (const ops of req.body){
+        updateOps[ops.propName]=ops.value;
+    }
+    Ticket.update({ _id:id },{ $set:updateOps })
+    .exec()
+    .then(result => {
+        console.log(result)
+        res.send(200).json(result)
+    })
+    .catch( err => {
+        console.log(err)
+        res.send(500).json(err)
+    })
 });
 
 module.exports = router;
