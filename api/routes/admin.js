@@ -3,7 +3,7 @@ const router  = express.Router();
 const Ticket = require('../models/ticket')
 const mongoose = require('mongoose');
 
-//----------Open up all tickets---------
+//----------Open up all tickets/change status to false---------
 
 router.patch('/',(req,res,next) => {
     // res.status(200).json({
