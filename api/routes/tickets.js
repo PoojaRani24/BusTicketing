@@ -9,15 +9,15 @@ var seat_no
 //----------Book a Ticket---------------
 router.post('/book',(req,res,next) => {
     //---------------------------
-        Ticket.find()
+        Ticket.find({status:"true"})
         .exec()
         .then(doc => {
             seat_no=doc.length
-            // console.log("Entries in db are: ")
-            // console.log(seat_no)
-            // console.log("hello bro")
-            // console.log(doc.length)
-            if(seat_no<40){
+            console.log("Entries in db are: ")
+            console.log(seat_no)
+            console.log("hello bro")
+            console.log(doc.length)
+            if(seat_no<3){
                 const ticket = new Ticket({
                     _id:mongoose.Types.ObjectId(),
                      status:true,
@@ -66,15 +66,46 @@ router.post('/book',(req,res,next) => {
 //----------View Open tickets---------
 
 router.get('/open',(req,res,next) => {
-    res.status(200).json({
-        message : "Handling GET Request to /tickets/open"
-    });
+    Ticket.find({status:"false"})
+    .select("_id status name src des")
+    .exec()
+    .then(doc => {
+        console.log(doc)
+        if(doc.length>0){
+            const response ={
+                count: doc.length,
+                tickets : doc.map(doc => {
+                    return {
+                        _id:doc._id,
+                        status:doc.status,
+                        name:doc.name,
+                        src:doc.src,
+                        des:doc.des,
+                        request:{
+                            type:'GET',
+                            url:'http://localhost:3000/tickets/'+doc._id
+                        }
+                    }
+                })
+            }
+            res.status(200).json(response)
+        }
+        else{
+        res.status(404).json({
+            message : "No Tickets in DB"
+        })
+    }
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({message:"Error occured while fetching all booked/closed tickets"})
+    })
 });
 
 //----------View Close tickets---------
 
 router.get('/close',(req,res,next) => {
-    Ticket.find()
+    Ticket.find({status:"true"})
     .select("_id status name src des")
     .exec()
     .then(doc => {
