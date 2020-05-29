@@ -17,10 +17,11 @@ router.post('/book',(req,res,next) => {
             console.log(seat_no)
             console.log("hello bro")
             console.log(doc.length)
+            //console.log(req.body)
             if(seat_no<40){
                 const ticket = new Ticket({
                     _id:mongoose.Types.ObjectId(),
-                     status:true,
+                     status: req.body.status || true,
                      name : req.body.name,
                      src:req.body.src,
                      des:req.body.des,
