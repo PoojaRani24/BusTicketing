@@ -7,21 +7,53 @@ const conn = require('../../../db/index.js');
 
 describe('POST /tickets/book',() => {
     before((done) => {
-       //this.timeout(12000);
-       mongoose.connect(
-        'mongodb+srv://bus-ticketing:'+
-        'bus-ticketing'+
-          '@cluster0-9ksoe.mongodb.net/test?retryWrites=true&w=majority',
-         {
-            useNewUrlParser: true,
-            useCreateIndex: true,
-            useUnifiedTopology: true,
-            promiseLibrary: global.Promise
-         }
-      )
-         .then(() => done())
-         .catch((err) => done(err));
+        conn.connect()
+        .then(() => done())
+        .catch((err) => done(err));
     })
+    
+    // before((done) => {
+    //     const Mockgoose = require('mockgoose').Mockgoose;
+    //     const mockgoose = new Mockgoose(mongoose);
+    //     mockgoose.prepareStorage()
+    //     .then(() => {
+    //     //------------------------
+    //       mongoose.connect(
+    //        'mongodb+srv://bus-ticketing:'+
+    //        'bus-ticketing'+
+    //        '@cluster0-9ksoe.mongodb.net/test?retryWrites=true&w=majority',
+    //        {
+    //         useNewUrlParser: true,
+    //         useCreateIndex: true,
+    //         useUnifiedTopology: true,
+    //         promiseLibrary: global.Promise
+    //       }
+    //     )
+    //     .then(() => done())
+    //     .catch((err) => done(err));
+    //    //------------------------------
+    //    })
+    //     .then(() => done())
+    //     .catch((err) => done(err));
+    // })
+
+    // before((done) => {
+    //     //------------------------
+    //    mongoose.connect(
+    //     'mongodb+srv://bus-ticketing:'+
+    //     'bus-ticketing'+
+    //       '@cluster0-9ksoe.mongodb.net/test?retryWrites=true&w=majority',
+    //      {
+    //         useNewUrlParser: true,
+    //         useCreateIndex: true,
+    //         useUnifiedTopology: true,
+    //         promiseLibrary: global.Promise
+    //      }
+    //   )
+    //   //------------------------------
+    //      .then(() => done())
+    //      .catch((err) => done(err));
+    // })
 
     after((done) => {
         // conn.close()
@@ -32,18 +64,23 @@ describe('POST /tickets/book',() => {
 
     it('OK, creating new ticket ',(done) => {
         request('http://localhost:3000').post('/tickets/book')
-        .send({name:'test',src:'test',des:'test'})
+        .send({status:'false',name:'test',src:'test',des:'test'})
         .then((res) => {
             const body = res.body;
-            console.log(body)
+            const ticketdetails =res.body.ticketdetails
+            // console.log(body)
+            // console.log(ticketdetails)
+            // console.log(body.ticketdetails._id)
             expect(body).to.contain.property('message');
             expect(body).to.contain.property('ticketdetails');
-            // expect(body).to.contain.property('src');
-            // expect(body).to.contain.property('des');
+            expect(ticketdetails).to.contain.property('_id');
+            expect(ticketdetails).to.contain.property('status');
+            expect(ticketdetails).to.contain.property('name');
+            expect(ticketdetails).to.contain.property('src');
+            expect(ticketdetails).to.contain.property('des');
             done();
         })
         .catch((err) => done(err));
-        //done()
     })
 
 })
