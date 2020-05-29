@@ -17,7 +17,7 @@ router.post('/book',(req,res,next) => {
             console.log(seat_no)
             console.log("hello bro")
             console.log(doc.length)
-            if(seat_no<3){
+            if(seat_no<40){
                 const ticket = new Ticket({
                     _id:mongoose.Types.ObjectId(),
                      status:true,

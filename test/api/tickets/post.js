@@ -35,10 +35,11 @@ describe('POST /tickets/book',() => {
         .send({name:'test',src:'test',des:'test'})
         .then((res) => {
             const body = res.body;
-            expect(body).to.contain.property(_id);
-            expect(body).to.contain.property('name');
-            expect(body).to.contain.property('src');
-            expect(body).to.contain.property('des');
+            console.log(body)
+            expect(body).to.contain.property('message');
+            expect(body).to.contain.property('ticketdetails');
+            // expect(body).to.contain.property('src');
+            // expect(body).to.contain.property('des');
             done();
         })
         .catch((err) => done(err));
