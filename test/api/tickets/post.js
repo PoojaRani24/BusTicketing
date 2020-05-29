@@ -63,10 +63,48 @@ describe('POST /tickets/book',() => {
         .send({status:'false',src:'test',des:'test'})
         .then((res) => {
             const body = res.body;
-            const ticketdetails =res.body.ticketdetails
              //console.log(body)
-             //console.log(body.error.errors.name.properties.type)
-             expect(body.error.errors.name.properties.type).to.equal('required');
+            // console.log(body.error._message)
+             expect(body.error._message).to.equal('Ticket validation failed');
+            done();
+        })
+        .catch((err) => done(err));
+    })
+
+    it('fail, ticket require src ',(done) => {
+        request('http://localhost:3000').post('/tickets/book')
+        .send({status:'false',name:'test',des:'test'})
+        .then((res) => {
+            const body = res.body;
+            //  console.log(body)
+            //  console.log(body.error._message)
+             expect(body.error._message).to.equal('Ticket validation failed');
+            done();
+        })
+        .catch((err) => done(err));
+    })
+
+    it('fail, ticket require des ',(done) => {
+        request('http://localhost:3000').post('/tickets/book')
+        .send({status:'false',name:'test',src:'test'})
+        .then((res) => {
+            const body = res.body;
+            //  console.log(body)
+            //  console.log(body.error._message)
+             expect(body.error._message).to.equal('Ticket validation failed');
+            done();
+        })
+        .catch((err) => done(err));
+    })
+
+    it('OK, status changes to true on booking ',(done) => {
+        request('http://localhost:3000').post('/tickets/book')
+        .send({status:'false',name:'test',src:'test',des:'test'})
+        .then((res) => {
+            const body = res.body;
+              //console.log(body)
+            //  console.log(body.error._message)
+             expect(body.ticketdetails.status).to.equal(true);
             done();
         })
         .catch((err) => done(err));
