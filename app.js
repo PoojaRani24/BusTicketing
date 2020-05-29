@@ -16,6 +16,9 @@ mongoose.connect(
         useNewUrlParser: true,
      }
   );
+
+  //mongoose.disconnect();
+
   mongoose.Promise =global.Promise;
 
 //middleware
