@@ -5,7 +5,7 @@ const mongoose   = require('mongoose');
 const app = require('../../../../app.js');
 const conn = require('../../../../db/index.js');
 
-describe('PATCH /tickets/:ticketId/update',() => {
+describe('PATCH /admin/open',() => {
     before((done) => {
         conn.connect()
         .then(() => done())
@@ -19,7 +19,7 @@ describe('PATCH /tickets/:ticketId/update',() => {
        .catch((err) => done(err));
     })
 
-     it('OK, updating status of a ticket : ',(done) => {
+     it('OK, open all tickets : ',(done) => {
         request('http://localhost:3000').post('/tickets/book')
         .send({status:'true',name:'name',src:'src',des:'des'})
         .then((res) => {

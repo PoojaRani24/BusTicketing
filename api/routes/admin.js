@@ -9,7 +9,7 @@ router.patch('/',(req,res,next) => {
     // res.status(200).json({
     //     message:"Hello"
     // })
-    Ticket.update({ status:'true' },{ $set:{status:'false'}})
+    Ticket.update({ status:'true' },{ $set:{status:'false'}}, {multi :true})
     .exec()
     .then(result => {
         console.log(result)
@@ -17,13 +17,13 @@ router.patch('/',(req,res,next) => {
             message :"Ticket is Updated",
             request:{
                 type:'GET',
-                url:'http://localhost:3000/open'
+                url:'http://localhost:3000/tickets/open'
             }
         })
     })
     .catch( err => {
         console.log(err)
-        res.send(500).json(err)
+        res.status(500).json(err)
     })
 });
 

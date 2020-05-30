@@ -255,7 +255,10 @@ router.patch('/:ticketId/update',(req,res,next) => {
     Ticket.update({ _id:id },{ $set:updateOps })
     .exec()
     .then(result => {
+        //console.log("this is result")
         console.log(result)
+       // console.log("this is res")
+        //console.log(res)
         res.status(200).json({
             message :"Ticket is Updated",
             request:{
@@ -266,7 +269,7 @@ router.patch('/:ticketId/update',(req,res,next) => {
     })
     .catch( err => {
         console.log(err)
-        res.send(500).json(err)
+        res.status(500).json(err)
     })
 });
 
