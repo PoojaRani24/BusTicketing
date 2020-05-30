@@ -19,62 +19,62 @@ describe('GET /tickets/:ticketId/status',() => {
        .catch((err) => done(err));
     })
 
-    // it('OK, geting status of ticket with status true/close : ',(done) => {
-    //     request('http://localhost:3000').post('/tickets/book')
-    //     .send({status:'true',name:'status close',src:'status',des:'status'})
-    //     .then((res) => {
-    //            const body=res.body;
-    //           // console.log(body)
-    //            const id= body.ticketdetails._id
-    //         //    console.log(id)
-    //          request('http://localhost:3000').get('/tickets/'+id+'/status')
-    //          .then((res) => {
-    //              const tic = res.body;
-    //             //    console.log(tic.message)
-    //                expect(tic.message).to.equal('Your ticket is Booked')
-    //             done();
-    //         })
-    //     })
-    //     .catch((err) => done(err));
-    // })
+    it('OK, geting status of ticket with status true/close  ',(done) => {
+        request('http://localhost:3000').post('/tickets/book')
+        .send({status:'true',name:'status close',src:'status',des:'status'})
+        .then((res) => {
+               const body=res.body;
+              // console.log(body)
+               const id= body.ticketdetails._id
+            //    console.log(id)
+             request('http://localhost:3000').get('/tickets/'+id+'/status')
+             .then((res) => {
+                 const tic = res.body;
+                //    console.log(tic.message)
+                   expect(tic.message).to.equal('Your ticket is Booked')
+                done();
+            })
+        })
+        .catch((err) => done(err));
+    })
 
-    // it('OK, geting status of ticket, with status false/open : ',(done) => {
-    //     request('http://localhost:3000').post('/tickets/book')
-    //     .send({status:'false',name:'status open',src:'status',des:'status'})
-    //     .then((res) => {
-    //            const body=res.body;
-    //            //console.log(body)
-    //            const id= body.ticketdetails._id
-    //           // console.log(id)
-    //          request('http://localhost:3000').get('/tickets/'+id+'/status')
-    //          .then((res) => {
-    //              const tic = res.body;
-    //            //    console.log(tic.message)
-    //                expect(tic.message).to.equal('Your ticket is not Booked')
-    //             done();
-    //         })
-    //     })
-    //     .catch((err) => done(err));
-    // })
+    it('OK, geting status of ticket, with status false/open  ',(done) => {
+        request('http://localhost:3000').post('/tickets/book')
+        .send({status:'false',name:'status open',src:'status',des:'status'})
+        .then((res) => {
+               const body=res.body;
+               //console.log(body)
+               const id= body.ticketdetails._id
+              // console.log(id)
+             request('http://localhost:3000').get('/tickets/'+id+'/status')
+             .then((res) => {
+                 const tic = res.body;
+               //    console.log(tic.message)
+                   expect(tic.message).to.equal('Your ticket is not Booked')
+                done();
+            })
+        })
+        .catch((err) => done(err));
+    })
 
-    // it('fail, Incorrect endpoint : ',(done) => {
-    //     request('http://localhost:3000').post('/tickets/book')
-    //     .send({status:'false',name:'Incorrect endpoint',src:'Incorrect endpoint',des:'Incorrect endpoint'})
-    //     .then((res) => {
-    //         const body=res.body;
-    //         const id= body.ticketdetails._id
-    //         request('http://localhost:3000').get('/tickets/'+id+'/ticketstatus')
-    //         .then((res) => {
-    //         //console.log(res)
-    //         const body = res.body;
-    //          //console.log(body)
-    //          //console.log(body.error.message)
-    //           expect(res.status).to.equal(404);
-    //         expect(body).to.contain.property('error');
-    //             done();
-    //         })
-    //     })
-    //     .catch((err) => done(err));
-    // })
+    it('fail, Incorrect endpoint  ',(done) => {
+        request('http://localhost:3000').post('/tickets/book')
+        .send({status:'false',name:'Incorrect endpoint',src:'Incorrect endpoint',des:'Incorrect endpoint'})
+        .then((res) => {
+            const body=res.body;
+            const id= body.ticketdetails._id
+            request('http://localhost:3000').get('/tickets/'+id+'/ticketstatus')
+            .then((res) => {
+            //console.log(res)
+            const body = res.body;
+             //console.log(body)
+             //console.log(body.error.message)
+              expect(res.status).to.equal(404);
+            expect(body).to.contain.property('error');
+                done();
+            })
+        })
+        .catch((err) => done(err));
+    })
 
 })

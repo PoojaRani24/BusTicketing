@@ -167,7 +167,7 @@ router.get('/:ticketId',(req,res,next) => {
 });
 
 //-----------delete a ticket by Id ---------------
-router.delete('/:ticketId',(req,res,next) => {
+router.delete('/id/:ticketId',(req,res,next) => {
     const id=req.params.ticketId
     Ticket.remove({_id:id})
     .exec()
@@ -178,8 +178,8 @@ router.delete('/:ticketId',(req,res,next) => {
         })
     })
     .catch(err => {
-        console/log(err)
-        res.send(404).json({
+        console.log(err)
+        res.status(404).json({
             error:err
         })
     })
@@ -269,8 +269,46 @@ router.patch('/:ticketId/update',(req,res,next) => {
     })
     .catch( err => {
         console.log(err)
-        res.status(500).json(err)
+        res.status(500).json({
+            message:err
+        })
     })
 });
 
 module.exports = router;
+
+//-----------delete all ticket with status false ---------------
+router.delete('/false',(req,res,next) => {
+    Ticket.remove({status:false},{multi:true})
+    .exec()
+    .then(result => {
+        console.log(result)
+        res.status(200).json({
+            message :"Ticket deleted"
+        })
+    })
+    .catch(err => {
+        console/log(err)
+        res.status(404).json({
+            error:err
+        })
+    })
+})
+
+//-----------delete all ticket with status true ---------------
+router.delete('/true',(req,res,next) => {
+    Ticket.remove({status:false},{multi:true})
+    .exec()
+    .then(result => {
+        console.log(result)
+        res.status(200).json({
+            message :"Ticket deleted"
+        })
+    })
+    .catch(err => {
+        console/log(err)
+        res.status(404).json({
+            error:err
+        })
+    })
+})

@@ -19,7 +19,7 @@ describe('PATCH /admin',() => {
        .catch((err) => done(err));
     })
 
-     it('OK, open all tickets : ',(done) => {
+     it('OK, open all tickets  ',(done) => {
         request('http://localhost:3000').post('/tickets/book')
         .send({status:'true',name:'admin',src:'admin',des:'admin'})
         .then((res) => {
@@ -28,11 +28,20 @@ describe('PATCH /admin',() => {
              request('http://localhost:3000').patch('/admin')
               .send([{"propName":"status","value":"false"}])
               .then((result) => {
-                  console.log(result)
                  expect(result.nmodified).to.not.equal(0);
+                 expect(result.status).to.equal(200);
               })
                 done();
             })
         .catch((err) => done(err));
     })
+
+    it('fail, Incoorect Endpoint  ',(done) => {
+        request('http://localhost:3000').patch('/adminroute')
+         .send([{"propName":"status","value":"false"}])
+         .then((result) => {
+            expect(result.status).to.equal(404);
+        })
+           done();
+       })
 })
