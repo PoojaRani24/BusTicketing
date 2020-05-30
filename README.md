@@ -6,7 +6,7 @@ Simple NodeJS server to handle ticketing for Bus Company
 2. Make changes in API and Test files accordingly
 
 # EndPoints For Required API
-1. [ PGET ] Update the ticket status (open/close + adding user details) - '/tickets/:ticketId/update' 
+1. [ PATCH ] Update the ticket status (open/close + adding user details) - '/tickets/:ticketId/update' 
 2. [ GET ] View Ticket Status -  '/tickets/:ticketId/status'
 3. [ GET ] View all closed tickets - '/tickets/close'
 4. [ GET ] View all open tickets - '/tickets/open'
