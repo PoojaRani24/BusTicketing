@@ -5,7 +5,7 @@ const mongoose   = require('mongoose');
 const app = require('../../../../app.js');
 const conn = require('../../../../db/index.js');
 
-describe('PATCH /admin/open',() => {
+describe('PATCH /admin',() => {
     before((done) => {
         conn.connect()
         .then(() => done())
@@ -21,22 +21,18 @@ describe('PATCH /admin/open',() => {
 
      it('OK, open all tickets : ',(done) => {
         request('http://localhost:3000').post('/tickets/book')
-        .send({status:'true',name:'name',src:'src',des:'des'})
+        .send({status:'true',name:'admin',src:'admin',des:'admin'})
         .then((res) => {
                const body=res.body;
-              // console.log(body)
                const id= body.ticketdetails._id
-            //    console.log(id)
-            //console.log(body)
-             request('http://localhost:3000').patch('/tickets/'+id+'/update')
-              .send([{"propName":"status","value":"false"},{"propName":"name","value":"updated name"},{"propName":"src","value":"updated src"},{"propName":"des","value":"updated des"}])
+             request('http://localhost:3000').patch('/admin')
+              .send([{"propName":"status","value":"false"}])
               .then((result) => {
                   console.log(result)
-                 expect(result.nmodified).to.equal(1);
+                 expect(result.nmodified).to.not.equal(0);
               })
                 done();
             })
         .catch((err) => done(err));
     })
-
 })

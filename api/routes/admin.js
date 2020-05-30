@@ -4,7 +4,7 @@ const Ticket = require('../models/ticket')
 const mongoose = require('mongoose');
 
 //----------Open up all tickets/change status to false---------
-
+//-----change status from : true -> false ---------------------
 router.patch('/',(req,res,next) => {
     // res.status(200).json({
     //     message:"Hello"
