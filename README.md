@@ -35,3 +35,4 @@ JSON FORMAT - {
 # Run Test Files - npm run test
 # Database Used - MongoDB(MongoDB Atlas)
 # Testing Libraries - Mocha, chai, Supertest
+# Public DNS for EC2 - ec2-18-191-155-75.us-east-2.compute.amazonaws.com
