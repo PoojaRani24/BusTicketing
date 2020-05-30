@@ -21,7 +21,7 @@ describe('GET /tickets/close',() => {
 
     // it('OK, Array size is same as total tickets with status true/close : ',(done) => {
     //     request('http://localhost:3000').post('/tickets/book')
-    //     .send({status:'false',name:'close',src:'close',des:'close'})
+    //     .send({status:'true',name:'close',src:'close',des:'close'})
     //     .then((res) => {
     //         request('http://localhost:3000').get('/tickets/close')
     //         .then((res) => {

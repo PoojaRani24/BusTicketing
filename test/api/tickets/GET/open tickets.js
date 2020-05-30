@@ -19,9 +19,9 @@ describe('GET /tickets/open',() => {
        .catch((err) => done(err));
     })
 
-    // it('OK, Array size is same as total tickets with status true/open : ',(done) => {
+    // it('OK, Array size is same as total tickets with status false/open : ',(done) => {
     //     request('http://localhost:3000').post('/tickets/book')
-    //     .send({status:'true',name:'open',src:'open',des:'open'})
+    //     .send({status:'false',name:'open',src:'open',des:'open'})
     //     .then((res) => {
     //         request('http://localhost:3000').get('/tickets/open')
     //         .then((res) => {
@@ -38,9 +38,9 @@ describe('GET /tickets/open',() => {
     //     .catch((err) => done(err));
     // })
 
-    // it('OK, getting tickets with status true/open : ',(done) => {
+    // it('OK, getting tickets with status false/open : ',(done) => {
     //     request('http://localhost:3000').post('/tickets/book')
-    //     .send({status:'true',name:'open',src:'open',des:'open'})
+    //     .send({status:'false',name:'open',src:'open',des:'open'})
     //     .then((res) => {
     //         request('http://localhost:3000').get('/tickets/open')
     //         .then((res) => {
@@ -49,7 +49,7 @@ describe('GET /tickets/open',() => {
     //             //const ticketdetails =res.body.ticketdetails
     //             //  console.log(body)
     //             //  console.log(body.count)
-    //              //expect(body.tickets[0].status).to.equal(true);
+    //              //expect(body.tickets[0].status).to.equal(false);
     //             expect(body.tickets.length).to.equal(count);
     //             done();
     //         })
