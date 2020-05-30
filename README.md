@@ -31,3 +31,7 @@ JSON FORMAT - {
                }
  5. [ GET ] View a ticket by Id - '/tickets/:ticketId'
 
+# Command to start server - npm start
+# Run Test Files - npm run test
+# Database Used - MongoDB(MongoDB Atlas)
+# Testing Libraries - Mocha, chai, Supertest
