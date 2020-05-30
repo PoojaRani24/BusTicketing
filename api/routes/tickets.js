@@ -220,7 +220,7 @@ router.get('/:ticketId/status',(req,res,next) => {
 router.get('/:ticketId/details',(req,res,next) => {
     const id=req.params.ticketId;
     Ticket.findById(id)
-    .select("_id name src des")
+    .select("_id status name src des")
     .exec()
     .then(doc => {
         console.log("From db ",doc);
