@@ -56,5 +56,23 @@ describe('GET /tickets/close',() => {
     //     })
     //     .catch((err) => done(err));
     // })
-
+   
+    // it('fail, Incorrect endpoint : ',(done) => {
+    //     request('http://localhost:3000').post('/tickets/book')
+    //     .send({status:'false',name:'Incorrect endpoint',src:'Incorrect endpoint',des:'Incorrect endpoint'})
+    //     .then((res) => {
+    //         request('http://localhost:3000').get('/tickets/closed')
+    //         .then((res) => {
+    //         //console.log(res)
+    //         const body = res.body;
+    //          //console.log(body)
+    //          //console.log(body.error.message)
+    //           expect(res.status).to.equal(500);
+    //         expect(body).to.contain.property('error');
+    //             done();
+    //         })
+    //     })
+    //     .catch((err) => done(err));
+    // })
+    
 })

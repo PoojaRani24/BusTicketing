@@ -97,4 +97,18 @@ describe('POST /tickets/book',() => {
     //     .catch((err) => done(err));
     //})
 
+    // it('fail, Using Incorrect Endpoint ',(done) => {
+    //     request('http://localhost:3000').post('/tickets/booking')
+    //     .send({status:'false',src:'test',des:'test'})
+    //     .then((res) => {
+    //         //console.log(res)
+    //         const body = res.body;
+    //          //console.log(body)
+    //          //console.log(body.error.message)
+    //          expect(body.error.message).to.equal('Route Not Found !');
+    //         done();
+    //     })
+    //     .catch((err) => done(err));
+    // })
+
 })

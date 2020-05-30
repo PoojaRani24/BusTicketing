@@ -57,4 +57,24 @@ describe('GET /tickets/:ticketId/status',() => {
     //     .catch((err) => done(err));
     // })
 
+    // it('fail, Incorrect endpoint : ',(done) => {
+    //     request('http://localhost:3000').post('/tickets/book')
+    //     .send({status:'false',name:'Incorrect endpoint',src:'Incorrect endpoint',des:'Incorrect endpoint'})
+    //     .then((res) => {
+    //         const body=res.body;
+    //         const id= body.ticketdetails._id
+    //         request('http://localhost:3000').get('/tickets/'+id+'/ticketstatus')
+    //         .then((res) => {
+    //         //console.log(res)
+    //         const body = res.body;
+    //          //console.log(body)
+    //          //console.log(body.error.message)
+    //           expect(res.status).to.equal(404);
+    //         expect(body).to.contain.property('error');
+    //             done();
+    //         })
+    //     })
+    //     .catch((err) => done(err));
+    // })
+
 })
