@@ -21,7 +21,7 @@ router.post('/book',(req,res,next) => {
             if(seat_no<40){
                 const ticket = new Ticket({
                     _id:mongoose.Types.ObjectId(),
-                     status: req.body.status || true,
+                     status: req.body.status,
                      name : req.body.name,
                      src:req.body.src,
                      des:req.body.des,
@@ -42,7 +42,8 @@ router.post('/book',(req,res,next) => {
                             des:result.des,
                             request:{
                                 type:'GET',
-                                url:"http://localhost:3000/tickets/"+result._id
+                                url:"http://localhost:3000/tickets/"+result._id,
+                                EC2_url :"http://ec2-18-191-155-75.us-east-2.compute.amazonaws.com:3000/tickets/"+result._id
                             }
                         }
                     });
@@ -87,7 +88,8 @@ router.get('/open',(req,res,next) => {
                         des:doc.des,
                         request:{
                             type:'GET',
-                            url:'http://localhost:3000/tickets/'+doc._id
+                            url:'http://localhost:3000/tickets/'+doc._id,
+                            EC2_url :"http://ec2-18-191-155-75.us-east-2.compute.amazonaws.com:3000/tickets/"+doc._id
                         }
                     }
                 })
@@ -126,7 +128,8 @@ router.get('/close',(req,res,next) => {
                         des:doc.des,
                         request:{
                             type:'GET',
-                            url:'http://localhost:3000/tickets/'+doc._id
+                            url:'http://localhost:3000/tickets/'+doc._id,
+                            EC2_url :"http://ec2-18-191-155-75.us-east-2.compute.amazonaws.com:3000/tickets/"+doc._id
                         }
                     }
                 })
@@ -263,7 +266,8 @@ router.patch('/:ticketId/update',(req,res,next) => {
             message :"Ticket is Updated",
             request:{
                 type:'GET',
-                url:'http://localhost:3000/tickets/'+id
+                url:'http://localhost:3000/tickets/'+id,
+                EC2_url :"http://ec2-18-191-155-75.us-east-2.compute.amazonaws.com:3000/tickets/"+id
             }
         })
     })

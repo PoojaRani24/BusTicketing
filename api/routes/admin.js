@@ -17,7 +17,8 @@ router.patch('/',(req,res,next) => {
             message :"Ticket is Updated",
             request:{
                 type:'GET',
-                url:'http://localhost:3000/tickets/open'
+                url:'http://localhost:3000/tickets/open',
+                EC2_url :"http://ec2-18-191-155-75.us-east-2.compute.amazonaws.com:3000/tickets/open"
             }
         })
     })
