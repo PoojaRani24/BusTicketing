@@ -297,7 +297,7 @@ router.delete('/false',(req,res,next) => {
 
 //-----------delete all ticket with status true ---------------
 router.delete('/true',(req,res,next) => {
-    Ticket.remove({status:false},{multi:true})
+    Ticket.remove({status:true},{multi:true})
     .exec()
     .then(result => {
         console.log(result)
