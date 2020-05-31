@@ -7,16 +7,16 @@ Simple NodeJS server to handle ticketing for Bus Company
 
 # EndPoints For Required API
 1. [ PATCH ] Update the ticket status (open/close + adding user details) - '/tickets/:ticketId/update' 
-2. [ GET ] View Ticket Status -  '/tickets/:ticketId/status'
-3. [ GET ] View all closed tickets - '/tickets/close'
-4. [ GET ] View all open tickets - '/tickets/open'
-5. [ GET ] View Details of person owning the ticket - '/tickets/:ticketId/details'
-6. [ PATCH ] Additional API for admin to reset the server (opens up all the tickets) - '/admin'
 JSON FORMAT - [
               {"propName":"name","value":"updatedname"},
               {"propName":"src","value":"newsource"}.
               ...
               ]
+2. [ GET ] View Ticket Status -  '/tickets/:ticketId/status'
+3. [ GET ] View all closed tickets - '/tickets/close'
+4. [ GET ] View all open tickets - '/tickets/open'
+5. [ GET ] View Details of person owning the ticket - '/tickets/:ticketId/details'
+6. [ PATCH ] Additional API for admin to reset the server (opens up all the tickets) - '/admin'
 
 # Additional API For Development and Testing Purpose
 1. [ DELETE ] Delete a ticket - '/id/:ticketId'
