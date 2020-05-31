@@ -6,6 +6,8 @@ const mongoose   = require('mongoose');
 
 const ticketRoutes = require('./api/routes/tickets');
 const adminRoutes  = require('./api/routes/admin');
+const baseRoute  = require('./api/routes/base');
+
 
 mongoose.connect(
     'mongodb+srv://bus-ticketing:'+
@@ -39,6 +41,7 @@ app.use((req,res,next) => {
 })
 
 //Routes that should handle request
+app.use('/',baseRoute);
 app.use('/tickets',ticketRoutes);
 app.use('/admin',adminRoutes);
 
