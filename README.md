@@ -19,9 +19,9 @@ JSON FORMAT - [
 6. [ PATCH ] Additional API for admin to reset the server (opens up all the tickets) - '/admin'
 
 # Additional API For Development and Testing Purpose
-1. [ DELETE ] Delete a ticket - '/id/:ticketId'
-2. [ DELETE ] Delete all ticket with status true/close - '/true'
-3. [ DELETE ] Delete all ticket with status false/open - '/false'
+1. [ DELETE ] Delete a ticket - '/tickets/id/:ticketId'
+2. [ DELETE ] Delete all ticket with status true/close - '/tickets/true'
+3. [ DELETE ] Delete all ticket with status false/open - '/tickets/false'
 4. [ POST ] Insert a ticket to DB - '/tickets/book'
 JSON FORMAT - {
                "name" : "anyname",
@@ -36,3 +36,5 @@ JSON FORMAT - {
 # Database Used - MongoDB(MongoDB Atlas)
 # Testing Libraries - Mocha, chai, Supertest
 # Public DNS for EC2 - ec2-18-191-155-75.us-east-2.compute.amazonaws.com
+# PORT - 3000
+# AWS EC2 instance link - http://ec2-18-191-155-75.us-east-2.compute.amazonaws.com:3000
